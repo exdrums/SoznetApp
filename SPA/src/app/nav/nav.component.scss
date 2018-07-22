@@ -1,0 +1,28 @@
+img {
+    max-height: 50px;
+    border: 2px solid white;
+    display: inline;
+}
+
+.fill-toolbar-space {
+    flex: 1 1 auto;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+}
+
+mat-form-field {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 120px;
+}
+.my-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}

@@ -1,57 +1,116 @@
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="active" >Soznet</a>
+<!-- <header>
+  <nav>
+    <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+      
+      <div fxFlex="40">
+        <a mat-raised-button [routerLink]="['/home']" routerLinkActive="active" >Soznet</a>
+        <ul class="nav navbar-nav" *ngIf="loggedIn()">
+          <li routerLinkActive="active"><a [routerLink]="['/members']">Matches</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['/lists']">Lists</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['/messages']">Messages</a></li>
+        </ul>
+      </div>
+
+
+        
+      <div>
+        <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right" (ngSubmit)="login()">
+          <div class="form-group">
+            <input type="text" #username="ngModel" placeholder="Username" class="form-control"  required name="username" [(ngModel)]="model.username">
+          </div>
+          <div class="form-group">
+            <input type="password" #password="ngModel" placeholder="Password" class="form-control" required name="password" [(ngModel)]="model.password">
+          </div>
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Sign in</button>
+        </form>
+      
+
+
+        <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
+          <li>
+            <img src="{{photoUrl}}" alt="">
+          </li>
+          <li class="dropdown" dropdown>
+            <a (click)="false" routerLinkActive="router-link-active"  class="dropdown-toggle" dropdownToggle>
+              Welcome {{authService.decodedToken?.unique_name | titlecase}}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" *dropdownMenu>
+              <li><a [routerLink]="['/member/edit']"><i class="fa fa-user"></i> Edit Profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav" *ngIf="loggedIn()">
-        <li routerLinkActive="active"><a [routerLink]="['/members']">Matches</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/lists']">Lists</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/messages']">Messages</a></li>
-      </ul>
+  </nav>
+</header> -->
 
-      <!--#loginform - angular-form defenition and Template-Reference
-          #username #password - Template-Reference
-          (ngSubmit)=login() - binding (to) component, to method login, by submiting
-          required - part of validation
-          name - display name
-          [(ngModel)] - binding (to) and [from] component, two-way-binding for MODEL of this form -->
-      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right" (ngSubmit)="login()">
-        <div class="form-group">
-          <input type="text" #username="ngModel" placeholder="Username" class="form-control"  required name="username" [(ngModel)]="model.username">
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'">
+      <mat-toolbar class="mat-elevation-z6" color="primary">Menu</mat-toolbar>
+       <mat-nav-list> <!--add ngIf -->
+        <a mat-list-item [routerLink]="['/members']" routerLinkActive="active">Matches</a>
+        <a mat-list-item [routerLink]="['/lists']" routerLinkActive="active">Lists</a>
+        <a mat-list-item [routerLink]="['/messages']" routerLinkActive="active">Messages</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="mat-elevation-z6 my-toolbar" color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <a mat-button [routerLink]="['/home']" routerLinkActive="active" >Soznet</a>
+        <!-- space  -->
+        <span class="fill-toolbar-space"></span>
+
+        <!--#loginform - angular-form defenition and Template-Reference
+            #username #password - Template-Reference
+            (ngSubmit)=login() - binding (to) component, to method login, by submiting
+            required - part of validation
+            name - display name
+            [(ngModel)] - binding (to) and [from] component, two-way-binding for MODEL of this form -->
+        <form *ngIf="!loggedIn()" #loginForm="ngForm" (ngSubmit)="login()" class="form-container">
+            <mat-form-field appearance="legacy" >
+              <input matInput type="text" placeholder="Username"
+                [(ngModel)]="model.username" #username="ngModel" required name="username">
+              <mat-icon matSuffix>face</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" >
+              <input matInput type="password" placeholder="Password"
+                [(ngModel)]="model.password" #password="ngModel" required name="password">
+                <mat-icon matSuffix>vpn_key</mat-icon>
+            </mat-form-field>
+            <button mat-button type="submit" [disabled]="!loginForm.valid">Sign in</button>
+        </form>
+
+        <div *ngIf="loggedIn()" class="form-container">
+            <img src="{{photoUrl}}" alt="">
+
+            <button mat-button [matMenuTriggerFor]="userMenu" routerLinkActive="router-link-active">
+              Welcome {{authService.decodedToken?.unique_name | titlecase}}
+              <span class="caret"></span>
+            </button>
+            <mat-menu #userMenu="matMenu">
+              <button mat-menu-item [routerLink]="['/member/edit']"><mat-icon>edit</mat-icon> Edit Profile</button>
+              
+              <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon> Logout</button>
+            </mat-menu>
         </div>
-        <div class="form-group">
-          <input type="password" #password="ngModel" placeholder="Password" class="form-control" required name="password" [(ngModel)]="model.password">
-        </div>
-        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Sign in</button>
-      </form>
-
-      <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
-        <li>
-          <img src="{{photoUrl}}" alt="">
-        </li>
-        <li class="dropdown" dropdown>
-          <a (click)="false" routerLinkActive="router-link-active"  class="dropdown-toggle" dropdownToggle>
-            Welcome {{authService.decodedToken?.unique_name | titlecase}}
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" *dropdownMenu>
-            <li><a [routerLink]="['/member/edit']"><i class="fa fa-user"></i> Edit Profile</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-
-    </div><!--/.navbar-collapse -->
-  </div>
-</nav>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <div style="margin-top: 70px;"><ng-content></ng-content></div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
 <!-- <pre>
   <h3>Forms property</h3>
