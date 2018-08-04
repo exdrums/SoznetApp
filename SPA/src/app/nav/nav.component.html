@@ -60,7 +60,7 @@
         <a mat-list-item [routerLink]="['/messages']" routerLinkActive="active">Messages</a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content style="height: 100%;">
       <mat-toolbar class="mat-elevation-z6 my-toolbar" color="primary">
         <button
           type="button"
@@ -108,7 +108,7 @@
         </div>
       </mat-toolbar>
       <!-- Add Content Here -->
-      <div style="margin-top: 70px;"><ng-content></ng-content></div>
+      <div style="margin-top: 70px; height: 100%;"><ng-content></ng-content></div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 

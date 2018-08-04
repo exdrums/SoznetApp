@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatCheckboxModule, MatSidenavModule,
     MatToolbarModule, MatIconModule, MatListModule,
-    MatMenuModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+    MatMenuModule, MatFormFieldModule, MatInputModule,
+    MatGridListModule, MatCardModule, MatRadioModule} from '@angular/material';
 import { LayoutModule } from '../../node_modules/@angular/cdk/layout';
 
 @NgModule({
@@ -15,7 +16,10 @@ import { LayoutModule } from '../../node_modules/@angular/cdk/layout';
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatGridListModule,
+        MatCardModule,
+        MatRadioModule
     ],
     exports: [
         LayoutModule,
@@ -27,7 +31,10 @@ import { LayoutModule } from '../../node_modules/@angular/cdk/layout';
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatGridListModule,
+        MatCardModule,
+        MatRadioModule
     ]
 })
 export class MyMaterialModule { }
