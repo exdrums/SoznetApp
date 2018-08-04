@@ -1,4 +1,4 @@
-namespace SoznetApp.API.Helpers
+namespace SoznetApp.Helpers
 {
     public class PaginationHeader
     {

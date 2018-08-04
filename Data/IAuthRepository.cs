@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using SoznetApp.API.Models;
+using SoznetApp.Models;
 
-namespace SoznetApp.API.Data
+namespace SoznetApp.Data
 {
     public interface IAuthRepository
     {

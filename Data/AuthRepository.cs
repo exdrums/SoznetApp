@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using SoznetApp.API.Models;
+using SoznetApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace SoznetApp.API.Data
+namespace SoznetApp.Data
 {
     public class AuthRepository : IAuthRepository
     {

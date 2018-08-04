@@ -1,9 +1,9 @@
 using System.Linq;
 using AutoMapper;
-using SoznetApp.API.Dtos;
-using SoznetApp.API.Models;
+using SoznetApp.Dtos;
+using SoznetApp.Models;
 
-namespace SoznetApp.API.Helpers
+namespace SoznetApp.Helpers
 {
     public class AutoMapperProfiles : Profile
     {

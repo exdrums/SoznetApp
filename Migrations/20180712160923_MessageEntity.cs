@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SoznetApp.API.Migrations
+namespace SoznetApp.Migrations
 {
     public partial class MessageEntity : Migration
     {

@@ -1,4 +1,4 @@
-namespace SoznetApp.API.Dtos
+namespace SoznetApp.Dtos
 {
     public class UserForUpdateDto
     {

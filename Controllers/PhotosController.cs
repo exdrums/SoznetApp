@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using SoznetApp.API.Data;
-using SoznetApp.API.Dtos;
-using SoznetApp.API.Helpers;
-using SoznetApp.API.Models;
+using SoznetApp.Data;
+using SoznetApp.Dtos;
+using SoznetApp.Helpers;
+using SoznetApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace SoznetApp.API.Controllers
+namespace SoznetApp.Controllers
 {
     [Authorize]
     [Route("api/users/{userID}/photos")]

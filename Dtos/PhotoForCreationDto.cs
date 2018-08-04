@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
 
-namespace SoznetApp.API.Dtos
+namespace SoznetApp.Dtos
 {
     public class PhotoForCreationDto
     {

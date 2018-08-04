@@ -1,11 +1,11 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using SoznetApp.API.Data;
+using SoznetApp.Data;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SoznetApp.API.Helpers
+namespace SoznetApp.Helpers
 {
     public class LogUserActivity : IAsyncActionFilter
     {

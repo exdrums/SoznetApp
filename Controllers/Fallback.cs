@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SoznetApp.API.Controllers
+namespace SoznetApp.Controllers
 {
     public class Fallback : Controller
     {

@@ -1,4 +1,4 @@
-namespace SoznetApp.API.Models
+namespace SoznetApp.Models
 {
     public class Value
     {

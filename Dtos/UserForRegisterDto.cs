@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SoznetApp.API.Dtos
+namespace SoznetApp.Dtos
 {
     public class UserForRegisterDto
     {

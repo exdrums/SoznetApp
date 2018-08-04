@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using SoznetApp.API.Models;
+using SoznetApp.Models;
 
-namespace SoznetApp.API.Dtos
+namespace SoznetApp.Dtos
 {
     public class UserForDetailDto
     {

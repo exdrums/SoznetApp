@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using SoznetApp.API.Models;
+using SoznetApp.Models;
 using Newtonsoft.Json;
 
-namespace SoznetApp.API.Data
+namespace SoznetApp.Data
 {
     public class Seed
     {

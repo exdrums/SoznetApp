@@ -5,8 +5,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using SoznetApp.API.Data;
-using SoznetApp.API.Helpers;
+using SoznetApp.Data;
+using SoznetApp.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -21,8 +21,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
-namespace SoznetApp.API
+namespace SoznetApp
 {
     public class Startup
     {
@@ -40,6 +41,7 @@ namespace SoznetApp.API
             services.AddDbContext<DataContext>(x => x
                 .UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
                 .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
+            
 
             services.AddTransient<Seed>();
             services.AddMvc()

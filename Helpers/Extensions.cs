@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace SoznetApp.API.Helpers
+namespace SoznetApp.Helpers
 {
     public static class Extensions
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace SoznetApp.API.Helpers
+namespace SoznetApp.Helpers
 {
     public class PagedList<T> : List<T>
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SoznetApp.API.Helpers;
-using SoznetApp.API.Models;
+using SoznetApp.Helpers;
+using SoznetApp.Models;
 
-namespace SoznetApp.API.Data
+namespace SoznetApp.Data
 {
     public interface IDatingRepository
     {

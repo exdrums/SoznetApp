@@ -4,14 +4,14 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using SoznetApp.API.Data;
-using SoznetApp.API.Dtos;
-using SoznetApp.API.Models;
+using SoznetApp.Data;
+using SoznetApp.Dtos;
+using SoznetApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace SoznetApp.API.Controllers
+namespace SoznetApp.Controllers
 {
     [Route("api/[controller]")]
     public class AuthController : Controller
