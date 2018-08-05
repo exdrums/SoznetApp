@@ -10,9 +10,11 @@ using SoznetApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SoznetApp.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
@@ -67,7 +69,7 @@ namespace SoznetApp.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                    new Claim(ClaimTypes.Name, userFromRepo.Username)
+                    new Claim(ClaimTypes.Name, userFromRepo.UserName)
                 }),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)

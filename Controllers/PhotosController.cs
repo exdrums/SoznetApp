@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 
 namespace SoznetApp.Controllers
 {
-    [Authorize]
     [Route("api/users/{userID}/photos")]
     public class PhotosController : Controller
     {

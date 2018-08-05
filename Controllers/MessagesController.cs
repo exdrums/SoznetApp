@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SoznetApp.Controllers
 {
-    [Authorize]
     [ServiceFilter(typeof(LogUserActivity))]
     [Route("api/users/{userId}/[controller]")]
     public class MessagesController : Controller
