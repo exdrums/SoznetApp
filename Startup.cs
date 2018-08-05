@@ -116,7 +116,7 @@ namespace SoznetApp
                     });
                 });
             }
-            //seeder.SeedUsers();
+            seeder.SeedUsers();
             //app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
