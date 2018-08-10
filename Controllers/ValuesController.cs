@@ -20,7 +20,9 @@ namespace SoznetApp.Controllers
             _context = context;
         }
 
+        // exaple of roles authorization
         // GET api/values
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
@@ -29,6 +31,7 @@ namespace SoznetApp.Controllers
         }
 
         // GET api/values/5
+        [Authorize(Roles = "Member")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
