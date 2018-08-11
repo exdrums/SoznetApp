@@ -3,10 +3,8 @@ import { Photo } from '../../_models/Photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../_services/auth.service';
-import { isNgTemplate } from '../../../../node_modules/@angular/compiler';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'app-photo-editor',
@@ -46,6 +44,8 @@ constructor(
       maxFileSize: 10 * 1024 * 1024
     });
 
+    this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
+
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Photo = JSON.parse(response);
@@ -68,10 +68,9 @@ constructor(
 
   setMainPhoto(photo: Photo) {
     this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
-      this.currentMain = _.findWhere(this.photos, {isMain: true});
+      this.currentMain = this.photos.filter(p => p.isMain === true)[0];
       this.currentMain.isMain = false;
       photo.isMain = true;
-      // this.getMemberPhotoChange.emit(photo.url);
       this.authService.changeMemberPhoto(photo.url);
       this.authService.currentUser.photoUrl = photo.url;
       localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
@@ -83,7 +82,7 @@ constructor(
   deletePhoto(id: number) {
     this.alertify.confirm('Are you sure you want to delete this photo?', () => {
       this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
-        this.photos.splice(_.findIndex(this.photos, { id: id }), 1);
+        this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
         this.alertify.success('Photo has been deleted');
       }, error => {
         this.alertify.error('Faild to delete');

@@ -1,4 +1,4 @@
-.panel-primary {
+.card {
     border: none;
 }
 
@@ -14,12 +14,12 @@
     border-bottom: 1px dotted #B3A9a9;
 }
 
-.img-circle {
+.rounded-circle {
     height: 50px;
     width: 50px;
 }
 
-.panel-body {
+.card-body {
     overflow-y: scroll;
     height: 400px; 
 }
