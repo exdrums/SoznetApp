@@ -2,7 +2,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +22,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { UserService } from './_services/user.service';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
+import { AdminService } from './_services/admin.service';
 
 import { TimeAgoPipe } from 'time-ago-pipe';
 
@@ -38,9 +39,14 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
 
 import { appRoutes } from './routes';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+
+
 
 
 export function getAccessToken(): string {
@@ -68,6 +74,9 @@ export const jwtConfig = {
     PhotoEditorComponent,
     AdminPanelComponent,
     HasRoleDirective,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    RolesModalComponent,
     TimeAgoPipe
 ],
   imports: [
@@ -86,7 +95,8 @@ export const jwtConfig = {
     JwtModule.forRoot({
       config: jwtConfig
     }),
-    FileUploadModule
+    FileUploadModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -94,12 +104,16 @@ export const jwtConfig = {
     AuthGuard,
     PreventUnsavedChanges,
     UserService,
+    AdminService,
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,
     ListsResolver,
     MessagesResolver,
     ErrorInterceptorProvider
+  ],
+  entryComponents: [
+    RolesModalComponent
   ],
   bootstrap: [AppComponent]
 })
