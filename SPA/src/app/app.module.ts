@@ -38,8 +38,10 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
 
 import { appRoutes } from './routes';
+
 
 export function getAccessToken(): string {
   return localStorage.getItem('token');
@@ -65,6 +67,7 @@ export const jwtConfig = {
     MemberMessagesComponent,
     PhotoEditorComponent,
     AdminPanelComponent,
+    HasRoleDirective,
     TimeAgoPipe
 ],
   imports: [
