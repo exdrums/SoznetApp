@@ -6,9 +6,24 @@ import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, But
 import { NgxGalleryModule } from 'ngx-gallery';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadModule } from '../../node_modules/ng2-file-upload';
+import { RouterModule } from '@angular/router';
 
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { AuthGuard } from './_guards/auth.guard';
+
+import { MemberDetailResolver } from './_resolves/member-detail.resolver';
+import { MemberListResolver } from './_resolves/member-list.resolver';
+import { MemberEditResolver } from './_resolves/member-edit.resolver';
+import { ListsResolver } from './_resolves/lists.resolver';
+import { MessagesResolver } from './_resolves/message.resolver';
+
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { UserService } from './_services/user.service';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
+
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -17,24 +32,14 @@ import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes';
-import { AuthGuard } from './_guards/auth.guard';
-import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { MemberDetailResolver } from './_resolves/member-detail.resolver';
-import { MemberListResolver } from './_resolves/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { MemberEditResolver } from './_resolves/member-edit.resolver';
-import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { FileUploadModule } from '../../node_modules/ng2-file-upload';
-import { TimeAgoPipe } from 'time-ago-pipe';
-import { ListsResolver } from './_resolves/lists.resolver';
-import { MessagesResolver } from './_resolves/message.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+
+import { appRoutes } from './routes';
 
 export function getAccessToken(): string {
   return localStorage.getItem('token');
@@ -59,6 +64,7 @@ export const jwtConfig = {
     MemberEditComponent,
     MemberMessagesComponent,
     PhotoEditorComponent,
+    AdminPanelComponent,
     TimeAgoPipe
 ],
   imports: [

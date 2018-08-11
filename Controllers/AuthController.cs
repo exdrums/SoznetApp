@@ -65,7 +65,7 @@ namespace SoznetApp.Controllers
                 // added for NavPhoto
                 var userToReturn = _mapper.Map<UserForListDto>(appUser);
 
-                return Ok(new { tokenString = GenerateJwtToken(appUser), user = userToReturn });
+                return Ok(new { tokenString = GenerateJwtToken(appUser).Result, user = userToReturn });
             }
             return Unauthorized();
         }
