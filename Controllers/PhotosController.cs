@@ -51,13 +51,13 @@ namespace SoznetApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoDto) 
         {
-            var user = await _repo.GetUser(userId);
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if(currentUserId != userId)
+                return Unauthorized();
+
+            var user = await _repo.GetUser(userId, true);
             if(user == null)
                 return BadRequest("Could not find user");
-
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            if(currentUserId != user.Id)
-                return Unauthorized();
             
             var file = photoDto.File;
             var uploadResult = new ImageUploadResult();
@@ -101,6 +101,10 @@ namespace SoznetApp.Controllers
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
+            var user = await _repo.GetUser(userId, true);
+            if (!user.Photos.Any(p => p.Id == id))
+                return Unauthorized();
+
             var photoFromRepo = await _repo.GetPhoto(id);
             if (photoFromRepo == null)
                 return NotFound();
@@ -124,6 +128,10 @@ namespace SoznetApp.Controllers
         public async Task<IActionResult> DeletePhoto(int userId, int id) 
         {
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _repo.GetUser(userId, true);
+            if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();
 
             var photoFromRepo = await _repo.GetPhoto(id);

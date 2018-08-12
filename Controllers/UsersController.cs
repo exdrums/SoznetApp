@@ -30,7 +30,7 @@ namespace SoznetApp.Controllers
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var userFromRepo = await _repo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUser(currentUserId, true);
 
             userParams.UserId = currentUserId;
 
@@ -51,7 +51,8 @@ namespace SoznetApp.Controllers
         [HttpGet("{id}", Name = "GetUser")] // GetUser is for register() in AuthController
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.GetUser(id);
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
+            var user = await _repo.GetUser(id, isCurrentUser);
 
             var userToReturn = _mapper.Map<UserForDetailDto>(user);
 
@@ -66,7 +67,7 @@ namespace SoznetApp.Controllers
                 return BadRequest(ModelState);
 
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userFromRepo = await _repo.GetUser(id);
+            var userFromRepo = await _repo.GetUser(id, true);
 
             if (userFromRepo==null)
                 return NotFound($"Could not find user with an ID of {id}");
@@ -92,7 +93,7 @@ namespace SoznetApp.Controllers
             if (like != null)
                 return BadRequest("You already like the user");
             
-            if (_repo.GetUser(recipientId) == null)
+            if (await _repo.GetUser(recipientId, false) == null)
                 return NotFound();
 
             like = new Like
