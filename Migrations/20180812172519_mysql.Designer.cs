@@ -9,14 +9,15 @@ using SoznetApp.Data;
 namespace SoznetApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180812124042_IsApproved")]
-    partial class IsApproved
+    [Migration("20180812172519_mysql")]
+    partial class mysql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799");
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
