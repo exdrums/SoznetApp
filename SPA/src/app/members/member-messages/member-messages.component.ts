@@ -4,6 +4,7 @@ import { UserService } from '../../_services/user.service';
 import { AuthService } from '../../_services/auth.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { tap } from 'rxjs/operators';
+import { SignalrService } from '../../_services/signalr.service';
 
 @Component({
   selector: 'app-member-messages',
@@ -19,7 +20,8 @@ export class MemberMessagesComponent implements OnInit {
 constructor(
     private userService: UserService,
     private authService: AuthService,
-    private alertify: AlertifyService) { }
+    private alertify: AlertifyService,
+    private signalr: SignalrService) { }
 
   ngOnInit() {
     this.loadMessages();
@@ -48,6 +50,7 @@ constructor(
     this.newMessage.recipientId = this.userId;
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
       .subscribe(message => {
+        // this.signalr.sendChatMessage(message);
         this.messages.unshift(message);
         this.newMessage.content = '';
       }, error => {

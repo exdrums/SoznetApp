@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Identity;
 using SoznetApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using SoznetApp.Hubs;
 
 namespace SoznetApp
 {
@@ -85,9 +86,11 @@ namespace SoznetApp
                 .AddJsonOptions(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+            services.AddSignalR();
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddCors();
+            services.AddOptions();
             services.AddAutoMapper();
             // services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
@@ -126,6 +129,9 @@ namespace SoznetApp
             app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseSignalR(routes => {
+                routes.MapHub<MessagesHub>("/api/srhub");
+            });
             app.UseMvc(routes => {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

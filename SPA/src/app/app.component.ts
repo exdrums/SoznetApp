@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from './_models/User';
+import { SignalrService } from './_services/signalr.service';
+import { AlertifyService } from './_services/alertify.service';
+import { Message } from './_models/message';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +16,9 @@ export class AppComponent implements OnInit {
 
 constructor(
   private authService: AuthService,
-  private jwtHelperService: JwtHelperService) {}
+  private jwtHelperService: JwtHelperService,
+  private sinalr: SignalrService,
+  private alertify: AlertifyService) {}
 
   ngOnInit() {
     // this loads decodedToken in service to show user-name in nav-component
@@ -30,5 +35,9 @@ constructor(
         this.authService.changeMemberPhoto('../assets/user.png');
       }
     }
+    this.sinalr.messageReceived.subscribe((message: Message) => {
+      console.log(message.content);
+      this.alertify.message(message.content);
+    });
   }
 }

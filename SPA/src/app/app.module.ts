@@ -45,6 +45,7 @@ import { HasRoleDirective } from './_directives/hasRole.directive';
 
 import { appRoutes } from './routes';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { SignalrService } from './_services/signalr.service';
 
 
 
@@ -105,6 +106,7 @@ export const jwtConfig = {
     PreventUnsavedChanges,
     UserService,
     AdminService,
+    SignalrService,
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,

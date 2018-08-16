@@ -9,6 +9,8 @@ using SoznetApp.Helpers;
 using SoznetApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using SoznetApp.Hubs;
 
 namespace SoznetApp.Controllers
 {
@@ -18,23 +20,25 @@ namespace SoznetApp.Controllers
     {
         private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
-        public MessagesController(IDatingRepository repo, IMapper mapper)
+        private readonly IHubContext<MessagesHub> _hubContext;
+        public MessagesController(IDatingRepository repo, IMapper mapper, IHubContext<MessagesHub> hubContext)
         {
+            _hubContext = hubContext;
             _mapper = mapper;
             _repo = repo;
         }
 
         [HttpGet("{id}", Name = "GetMessage")]
-        public async Task<IActionResult> GetMessage(int userId, int id) 
+        public async Task<IActionResult> GetMessage(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var messageFromRepo = await _repo.GetMessage(id);
 
-            if(messageFromRepo == null)
+            if (messageFromRepo == null)
                 return NotFound();
-            
+
             return Ok(messageFromRepo);
         }
 
@@ -55,7 +59,7 @@ namespace SoznetApp.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
+
             var messagesFromRepo = await _repo.GetMessagesForUser(messageParams);
 
             var messages = _mapper.Map<IEnumerable<MessageForReturnDto>>(messagesFromRepo);
@@ -74,49 +78,53 @@ namespace SoznetApp.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
+
             messageForCreationDto.SenderId = userId;
 
             var recipient = await _repo.GetUser(messageForCreationDto.RecipientId, false);
             var sender = await _repo.GetUser(messageForCreationDto.SenderId, false);
-            if(recipient == null)
+            if (recipient == null)
                 return BadRequest("Could not find user");
-            
+
             var message = _mapper.Map<Message>(messageForCreationDto);
             _repo.Add(message);
             var messageToReturn = _mapper.Map<MessageForReturnDto>(message);
 
-            if(await _repo.SaveAll())
-                return CreatedAtRoute("GetMessage", new {id = message.Id}, messageToReturn);
-            
+            if (await _repo.SaveAll())
+            {
+                //await _hubContext.Clients.User(User.FindFirst(ClaimTypes.NameIdentifier).Value).SendAsync("PrivateMessage", message.Content);
+                await _hubContext.Clients.All.SendAsync("PrivateMessage", messageToReturn);
+                return CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
+            }
+
             throw new Exception("Creating the message failed on save");
         }
 
         [HttpPost("{id}")] // not HttpDelete because of the message can be not deleted, 
-        public async Task<IActionResult> DeleteMessage(int id, int userId) 
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var messageFromRepo = await _repo.GetMessage(id);
 
-            if(messageFromRepo.SenderId == userId)
+            if (messageFromRepo.SenderId == userId)
                 messageFromRepo.SenderDeleted = true;
-            
-            if(messageFromRepo.RecipientId == userId)
+
+            if (messageFromRepo.RecipientId == userId)
                 messageFromRepo.RecipientDeleted = true;
 
-            if(messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
+            if (messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
                 _repo.Delete(messageFromRepo);
-            
+
             if (await _repo.SaveAll())
                 return NoContent();
-            
+
             throw new Exception("Error deleting the message");
         }
 
         [HttpPost("{id}/read")]
-        public async Task<IActionResult> MarkMessageAsRead(int userId, int id) 
+        public async Task<IActionResult> MarkMessageAsRead(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -125,11 +133,11 @@ namespace SoznetApp.Controllers
 
             if (message.RecipientId != userId)
                 return BadRequest("Failed to mark message as read");
-            
+
             message.IsRead = true;
             message.DateRead = DateTime.Now;
             await _repo.SaveAll();
-            
+
             return NoContent();
         }
     }
