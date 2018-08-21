@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthUser } from '../_models/authUser';
 import { User } from '../_models/User';
 import { BehaviorSubject } from 'rxjs';
+import { SignalrService } from './signalr.service';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,8 @@ export class AuthService {
 
 constructor(
   private http: HttpClient,
-  private jwtHelperSerice: JwtHelperService) { }
+  private jwtHelperSerice: JwtHelperService,
+  private signalr: SignalrService) { }
 
   changeMemberPhoto(photoUrl) {
     this.photoUrl.next(photoUrl);
@@ -45,6 +47,7 @@ constructor(
           } else {
             this.changeMemberPhoto('../../assets/user.png');
           }
+          this.signalr.addToGroup(this.decodedToken.nameid);
         }
       })
     );

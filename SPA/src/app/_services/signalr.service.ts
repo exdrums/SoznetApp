@@ -20,11 +20,15 @@ constructor() {
     this.startConnection();
   }
 
-  sendChatMessage(message: Message) {
-    this.hubConnection.invoke('SendMessage', message);
+  sendChatMessage(message: Message, userId: string) {
+    this.hubConnection.invoke('SendMessage', message, userId);
   }
 
-  private createConnection() {
+  addToGroup(groupName: string) {
+    this.hubConnection.invoke('AddToGroup', groupName);
+  }
+
+  public createConnection() {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.baseUrl + 'srhub')
       .build();
@@ -47,6 +51,9 @@ constructor() {
     this.hubConnection.on('PrivateMessage', (data: any) => {
       console.log('onPrivateMessageRecieved');
       this.messageReceived.next(data);
+    });
+    this.hubConnection.on('ReceiveSystemMessage', (data: any) => {
+      console.log('System:' + data);
     });
   }
 }

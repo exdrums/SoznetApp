@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 constructor(
   private authService: AuthService,
   private jwtHelperService: JwtHelperService,
-  private sinalr: SignalrService,
+  private signalr: SignalrService,
   private alertify: AlertifyService) {}
 
   ngOnInit() {
@@ -34,10 +34,14 @@ constructor(
       } else {
         this.authService.changeMemberPhoto('../assets/user.png');
       }
+      this.signalr.connectionEstablished.subscribe(data => {
+        if (data) {
+          this.signalr.addToGroup(this.authService.decodedToken.nameid);
+        }
+      });
     }
-    this.sinalr.messageReceived.subscribe((message: Message) => {
-      console.log(message.content);
-      this.alertify.message(message.content);
+    this.signalr.messageReceived.subscribe((message: Message) => {
+      this.alertify.success(message.content);
     });
   }
 }

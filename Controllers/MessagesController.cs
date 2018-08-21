@@ -92,8 +92,8 @@ namespace SoznetApp.Controllers
 
             if (await _repo.SaveAll())
             {
-                //await _hubContext.Clients.User(User.FindFirst(ClaimTypes.NameIdentifier).Value).SendAsync("PrivateMessage", message.Content);
-                await _hubContext.Clients.All.SendAsync("PrivateMessage", messageToReturn);
+                          
+                await _hubContext.Clients.Group(messageToReturn.RecipientId.ToString()).SendAsync("PrivateMessage", messageToReturn);
                 return CreatedAtRoute("GetMessage", new { id = message.Id }, messageToReturn);
             }
 
