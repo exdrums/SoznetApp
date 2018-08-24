@@ -8,6 +8,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from '../../node_modules/ng2-file-upload';
 import { RouterModule } from '@angular/router';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { AuthGuard } from './_guards/auth.guard';
@@ -84,20 +86,21 @@ export const jwtConfig = {
     BrowserModule,
     HttpModule,
     FormsModule,
-    BsDropdownModule.forRoot(),
+    // BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    TabsModule.forRoot(),
-    NgxGalleryModule,
+    TabsModule.forRoot(), // to migrate !!
+    NgxGalleryModule, // to migrate
     HttpClientModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot(),
-    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot(), // to migrate!!
+    PaginationModule.forRoot(), // to migrate!!
+    ButtonsModule.forRoot(), // to migrate!!
     JwtModule.forRoot({
       config: jwtConfig
     }),
     FileUploadModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(), // to migrate
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     AuthService,
