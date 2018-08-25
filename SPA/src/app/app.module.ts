@@ -100,11 +100,7 @@ export const jwtConfig = {
     }),
     FileUploadModule,
     ModalModule.forRoot(), // to migrate
-    MDBBootstrapModule.forRoot(),
-    // NavbarModule,
-    // WavesModule.forRoot(),
-    // ButtonsModule.forRoot(),
-    // InputsModule.forRoot()
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     AuthService,
