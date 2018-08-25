@@ -2,13 +2,13 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ModalModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from '../../node_modules/ng2-file-upload';
 import { RouterModule } from '@angular/router';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, NavbarModule, WavesModule, ButtonsModule, InputsModule} from 'angular-bootstrap-md';
 
 
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
@@ -94,13 +94,17 @@ export const jwtConfig = {
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(), // to migrate!!
     PaginationModule.forRoot(), // to migrate!!
-    ButtonsModule.forRoot(), // to migrate!!
+    // ButtonsModule.forRoot(), // to migrate!!
     JwtModule.forRoot({
       config: jwtConfig
     }),
     FileUploadModule,
     ModalModule.forRoot(), // to migrate
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    // NavbarModule,
+    // WavesModule.forRoot(),
+    // ButtonsModule.forRoot(),
+    // InputsModule.forRoot()
   ],
   providers: [
     AuthService,
