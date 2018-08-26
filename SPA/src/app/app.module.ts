@@ -43,11 +43,13 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { LoginComponent } from './login/login.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
 
 import { appRoutes } from './routes';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { SignalrService } from './_services/signalr.service';
+
 
 
 
@@ -80,8 +82,9 @@ export const jwtConfig = {
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    TimeAgoPipe
-],
+    TimeAgoPipe,
+    LoginComponent
+  ],
   imports: [
     BrowserModule,
     HttpModule,
