@@ -5,7 +5,7 @@ import { User } from '../../_models/User';
 @Component({
   selector: 'app-roles-modal',
   templateUrl: './roles-modal.component.html',
-  styleUrls: ['./roles-modal.component.css']
+  styleUrls: ['./roles-modal.component.scss']
 })
 export class RolesModalComponent implements OnInit {
 

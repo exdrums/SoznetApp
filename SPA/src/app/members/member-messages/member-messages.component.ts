@@ -9,7 +9,7 @@ import { SignalrService } from '../../_services/signalr.service';
 @Component({
   selector: 'app-member-messages',
   templateUrl: './member-messages.component.html',
-  styleUrls: ['./member-messages.component.css']
+  styleUrls: ['./member-messages.component.scss']
 })
 export class MemberMessagesComponent implements OnInit {
 

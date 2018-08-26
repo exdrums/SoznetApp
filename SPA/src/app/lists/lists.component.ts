@@ -9,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css']
+  styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent implements OnInit {
 

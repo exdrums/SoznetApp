@@ -9,7 +9,7 @@ import { TabsetComponent } from '../../../../node_modules/ngx-bootstrap';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
-  styleUrls: ['./member-detail.component.css']
+  styleUrls: ['./member-detail.component.scss']
 })
 export class MemberDetailComponent implements OnInit {
 
