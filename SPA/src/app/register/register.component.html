@@ -1,113 +1,109 @@
-<mdb-card>
-  <mdb-card-body>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-      <h2 class="text-center text-primary">Sign Up</h2>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <h2 class="text-center text-primary">Sign Up</h2>
 
-      <hr>
+  <hr>
 
-      <!-- Gender -->
-      <div class="form-group">
-        <label style="margin-right: 10px" class="control-label">I am a: </label>
-        <label class="radio-inline">
-          <input class="mr-3" type="radio" value="male" formControlName="gender">Male
-        </label>
-        <label class="radio-inline ml-3">
-          <input class="mr-3" type="radio" value="female" formControlName="gender">Female
-        </label>
-      </div>
+  <!-- Gender -->
+  <div class="form-group">
+    <label style="margin-right: 10px" class="control-label">I am a: </label>
+    <label class="radio-inline">
+      <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+    </label>
+    <label class="radio-inline ml-3">
+      <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+    </label>
+  </div>
 
-      <!-- Username -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective id="userform" type="text" class="form-control form-control-sm" formControlName="username" data-error="Username is required"
-          [ngClass]="{'is-invalid':
-          registerForm.get('username').errors && registerForm.get('username').touched}">
-          <label for="userform" class="">Username</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
-          Username is required
-        </div> -->
-      </div>
+  <!-- Username -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective id="userform" type="text" class="form-control form-control-sm" formControlName="username" data-error="Username is required"
+      [ngClass]="{'is-invalid':
+      registerForm.get('username').errors && registerForm.get('username').touched}">
+      <label for="userform" class="">Username</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
+      Username is required
+    </div> -->
+  </div>
 
-      <!-- Known As -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective class="form-control form-control-sm" type="text" id="knownasform" formControlName="knownAs" data-error="Known as is required"
-          [ngClass]="{'is-invalid':
-          registerForm.get('knownAs').hasError('required') && registerForm.get('knownAs').touched}">
-          <label for="knownasform" class="">Known as</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').hasError('required') && registerForm.get('knownAs').touched">
-            Known as is required
-        </div> -->
-      </div>
+  <!-- Known As -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective class="form-control form-control-sm" type="text" id="knownasform" formControlName="knownAs" data-error="Known as is required"
+      [ngClass]="{'is-invalid':
+      registerForm.get('knownAs').hasError('required') && registerForm.get('knownAs').touched}">
+      <label for="knownasform" class="">Known as</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').hasError('required') && registerForm.get('knownAs').touched">
+        Known as is required
+    </div> -->
+  </div>
 
-      <!-- Date Of Birth -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective bsDatepicker [bsConfig]="bsConfig" type="text" class="form-control form-control-sm" id="dateform" formControlName="dateOfBirth" data-error="Date of birth is required"
-          [ngClass]="{'is-invalid':
-          registerForm.get('dateOfBirth').hasError('required') && registerForm.get('dateOfBirth').touched}">
-          <label for="dateform" class="">Date of birth</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').hasError('required') && registerForm.get('dateOfBirth').touched">
-            Date of birth is required
-        </div> -->
-      </div>
+  <!-- Date Of Birth -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective bsDatepicker [bsConfig]="bsConfig" type="text" class="form-control form-control-sm" id="dateform" formControlName="dateOfBirth" data-error="Date of birth is required"
+      [ngClass]="{'is-invalid':
+      registerForm.get('dateOfBirth').hasError('required') && registerForm.get('dateOfBirth').touched}">
+      <label for="dateform" class="">Date of birth</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').hasError('required') && registerForm.get('dateOfBirth').touched">
+        Date of birth is required
+    </div> -->
+  </div>
 
-      <!-- City -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective type="text" class="form-control form-control-sm" id="cityform" formControlName="city" data-error="City is required"
-          [ngClass]="{'is-invalid':
-          registerForm.get('city').hasError('required') && registerForm.get('city').touched}">
-          <label for="cityform" class="">City</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('city').hasError('required') && registerForm.get('city').touched">
-            City is required
-        </div> -->
-      </div>
+  <!-- City -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective type="text" class="form-control form-control-sm" id="cityform" formControlName="city" data-error="City is required"
+      [ngClass]="{'is-invalid':
+      registerForm.get('city').hasError('required') && registerForm.get('city').touched}">
+      <label for="cityform" class="">City</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('city').hasError('required') && registerForm.get('city').touched">
+        City is required
+    </div> -->
+  </div>
 
-      <!-- Country -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective type="text" class="form-control form-control-sm" formControlName="country" id="countryform" data-error="Country is required"
-          [ngClass]="{'is-invalid':
-          registerForm.get('country').hasError('required') && registerForm.get('country').touched}">
-          <label for="countryform" class="">Country</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('country').hasError('required') && registerForm.get('country').touched">
-            Country is required
-        </div> -->
-      </div>
+  <!-- Country -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective type="text" class="form-control form-control-sm" formControlName="country" id="countryform" data-error="Country is required"
+      [ngClass]="{'is-invalid':
+      registerForm.get('country').hasError('required') && registerForm.get('country').touched}">
+      <label for="countryform" class="">Country</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('country').hasError('required') && registerForm.get('country').touched">
+        Country is required
+    </div> -->
+  </div>
 
-      <!-- Password -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective type="password" class="form-control form-control-sm" formControlName="password" id="passwordform" data-error="Password is required"
-        [ngClass]="{'is-invalid': 
-        registerForm.get('password').errors && registerForm.get('password').touched}">
-        <label for="passwordform" class="">Password</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
-          Password is required
-        </div> -->
-        <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
-          Password must be at least 4 characters
-        </div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
-          Password cannot exceed 8 characters
-        </div>
-      </div>
+  <!-- Password -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective type="password" class="form-control form-control-sm" formControlName="password" id="passwordform" data-error="Password is required"
+    [ngClass]="{'is-invalid': 
+    registerForm.get('password').errors && registerForm.get('password').touched}">
+    <label for="passwordform" class="">Password</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+      Password is required
+    </div> -->
+    <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+      Password must be at least 4 characters
+    </div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+      Password cannot exceed 8 characters
+    </div>
+  </div>
 
-      <!-- Confirm Password -->
-      <div class="md-form form-sm">
-        <input mdbInputDirective type="password" class="form-control form-control-sm" formControlName="confirmPassword" id="cpasswordform"  data-error="Confirm Password is required"
-          [ngClass]="{'has-error': 
-          registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched
-          || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}">
-          <label for="cpasswordform" class="">Confirm password</label>
-        <!-- <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
-          Confirm Password is required
-        </div> -->
-        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')">
-          Confirm Password must match password
-        </div>
-      </div>
+  <!-- Confirm Password -->
+  <div class="md-form form-sm">
+    <input mdbInputDirective type="password" class="form-control form-control-sm" formControlName="confirmPassword" id="cpasswordform"  data-error="Confirm Password is required"
+      [ngClass]="{'has-error': 
+      registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched
+      || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}">
+      <label for="cpasswordform" class="">Confirm password</label>
+    <!-- <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+      Confirm Password is required
+    </div> -->
+    <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')">
+      Confirm Password must match password
+    </div>
+  </div>
 
-      <!-- Buttons -->
-      <div class="form-group text-center">
-        <button mdbBtn mdbWavesEffect color="success" outline="true" class="waves-light" type="submit" [disabled]="!registerForm.valid">Register</button>
-        <button mdbBtn mdbWavesEffect color="danger" outline="true" class="waves-light" type="button" (click)="cancel()">Cancel</button>
-      </div>
-    </form>
-  </mdb-card-body>
-</mdb-card>
+  <!-- Buttons -->
+  <div class="form-group text-center">
+    <button mdbBtn mdbWavesEffect color="success" outline="true" class="waves-light" type="submit" [disabled]="!registerForm.valid">Register</button>
+    <button mdbBtn mdbWavesEffect color="danger" outline="true" class="waves-light" type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>

@@ -1,14 +1,23 @@
 <div class="container mt-5">
     <div class="row">
         <div class="btn-group">
-            <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Unread" (click)="loadMessages()">
-                <i class="fa fa-envelope"></i> Unread
+            <button mdbBtn mdbWavesEffect
+                mdbRadio="Unread" color="primary"
+                [(ngModel)]="messageContainer" (click)="loadMessages()">
+                <i class="fa fa-envelope"></i> 
+                Unread
             </button>
-            <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Inbox" (click)="loadMessages()">
-                <i class="fa fa-envelope-open"></i> Inbox
+            <button mdbBtn mdbWavesEffect
+                mdbRadio="Inbox" color="primary"
+                (click)="loadMessages()" [(ngModel)]="messageContainer">
+                <i class="fa fa-envelope-open"></i>
+                Inbox
             </button>
-            <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="Outbox" (click)="loadMessages()">
-                <i class="fa fa-paper-plane"></i> Outbox
+            <button mdbBtn mdbWavesEffect
+                mdbRadio="Outbox" color="primary"
+                (click)="loadMessages()" [(ngModel)]="messageContainer">
+                <i class="fa fa-paper-plane"></i>
+                Outbox
             </button>
         </div>
     </div>
@@ -29,17 +38,20 @@
                 <td>{{message.content}}</td>
                 <td>
                     <div *ngIf="messageContainer != 'Outbox'">
-                        <img [src]="message.senderPhotoUrl" class="img-circle rounded-circle mr-1">
+                        <img [src]="message.senderPhotoUrl || '../../assets/user.png'" class="img-circle rounded-circle mr-1">
                         <strong>{{message.senderKnownAs}}</strong>
                     </div>
                     <div *ngIf="messageContainer == 'Outbox'">
-                        <img [src]="message.recipientPhotoUrl" class="img-circle rounded-circle mr-1">
+                        <img [src]="message.recipientPhotoUrl || '../../assets/user.png'" class="img-circle rounded-circle mr-1">
                         <strong>{{message.recipientKnownAs}}</strong>
                     </div>
                 </td>
                 <td>{{message.messageSent | timeAgo}}</td>
                 <td>
-                    <button class="btn btn-danger" (click)="$event.stopPropagation" (click)="deleteMessage(message.id)">Delete</button>
+                    <button mdbBtn mdbWavesEffect color="danger" 
+                        (click)="$event.stopPropagation" (click)="deleteMessage(message.id)">
+                        Delete
+                    </button>
                 </td>
             </tr>
         </table>
