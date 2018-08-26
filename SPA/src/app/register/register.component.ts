@@ -14,7 +14,7 @@ import { Router } from '../../../node_modules/@angular/router';
 export class RegisterComponent implements OnInit {
 
   @Input() valuesFromHome: any;
-  @Output() cancelRegister = new EventEmitter();
+  // @Output() cancelRegister = new EventEmitter();
   user: User;
   registerForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -83,7 +83,7 @@ constructor(
   }
 
   cancel() {
-    this.cancelRegister.emit(false);
+    // this.cancelRegister.emit(false);
     // console.log('canceled');
   }
 }

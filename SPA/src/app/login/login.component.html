@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+    <div class="md-form form-sm">
+      <!-- <i class="fa fa-envelope prefix"></i> -->
+      <input mdbInputDirective data-error="Username is required"
+        type="text" id="login-username" class="form-control" name="username"
+        formControlName="username">
+      <label for="login-username">Username</label>
+    </div>
+
+    <div class="md-form form-sm">
+      <!-- <i class="fa fa-pencil prefix"></i> -->
+      <input mdbInputDirective data-error="Password is required"
+        type="password" id="login-password" class="form-control" name="password"
+        formControlName="password">
+      <label for="login-password">Password</label>
+    </div>
+
+    <div class="text-center mt-1-half">
+      <button mdbBtn mdbWavesEffect
+        color="success" outline="true" class="mb-2 waves-light" type="submit"
+        [disabled]="!loginForm.valid">Login
+        <i class="fa fa-send ml-1"></i>
+      </button>
+    </div>
+  </form>
