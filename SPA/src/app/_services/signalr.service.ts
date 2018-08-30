@@ -34,6 +34,13 @@ constructor() {
       .build();
   }
 
+  public disconnect() {
+    this.hubConnection.stop().then(() => {
+      console.log('Hub connection stoped');
+      this.connectionEstablished.next(false);
+    });
+  }
+
   private startConnection(): void {
     this.hubConnection
       .start()
