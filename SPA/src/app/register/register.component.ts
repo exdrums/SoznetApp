@@ -14,7 +14,7 @@ import { Router } from '../../../node_modules/@angular/router';
 export class RegisterComponent implements OnInit {
 
   @Input() valuesFromHome: any;
-  // @Output() cancelRegister = new EventEmitter();
+  @Output() closeRegister = new EventEmitter();
   user: User;
   registerForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
@@ -71,6 +71,7 @@ constructor(
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(() => {
+        this.closeRegister.emit();
         this.alertify.success('Regisration successful');
       }, error => {
         this.alertify.error(error);

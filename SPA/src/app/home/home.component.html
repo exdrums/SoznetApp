@@ -4,45 +4,5 @@
       Find your match!
     </h1>
     <p class="lead">Come on in to view your matches.. All you need to do is sign up!</p>
-    <div>
-      <button mdbBtn mdbWavesEffect (click)="registerModal.show()" color="primary" type="button">Register</button>
-      <button mdbBtn mdbWavesEffect (click)="loginModal.show()" color="info" type="button">Login</button>
-    </div>
   </div>
-
-  <!-- <div *ngIf="registerMode" class="container"> -->
-  <div mdbModal #registerModal="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
-      <div class="modal-content">
-        <!--Header-->
-        <div class="modal-header light-blue darken-3 white-text">
-          <h4 class="title">
-            <i class="fa fa-pencil"></i> Register</h4>
-          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="registerModal.hide()">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <app-register class="modal-body mb-0" [valuesFromHome]="values" (cancelRegister)="cancelRegisterMode($event)"></app-register>
-      </div>
-    </div>
-  </div>
-
-  <div mdbModal #loginModal="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
-      <div class="modal-content">
-          <!--Header-->
-          <div class="modal-header bg-primary darken-3 white-text">
-            <h4 class="title">
-              <i class="fa fa-pencil"></i> Login</h4>
-            <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="loginModal.hide()">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-        <app-login class="modal-body mb-0"></app-login>
-      </div>
-    </div>
-  </div>
-
 </div>

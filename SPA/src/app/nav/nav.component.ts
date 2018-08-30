@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
@@ -13,6 +13,8 @@ export class NavComponent implements OnInit {
 
   model: any = {};
   photoUrl: string;
+  @Output() loginEmmiter = new EventEmitter<string>();
+  @Output() registerEmmiter = new EventEmitter<string>();
 
 constructor(
   public authService: AuthService,
@@ -22,17 +24,6 @@ constructor(
 
   ngOnInit() {
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
-  }
-
-  login() {
-    // console.log('Component:' + this.model);
-    this.authService.login(this.model).subscribe(data => {
-      this.alertify.success('logged in succesfully');
-    }, error => {
-      this.alertify.error('Failed to login');
-    }, () => {
-      this.router.navigate(['/members']);
-    });
   }
 
   logout() {

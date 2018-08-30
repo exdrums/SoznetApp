@@ -17,32 +17,26 @@
         </li>
       </ul>
       <div *ngIf="loggedIn()" class="nav-item dropdown btn-group ml-auto" dropdown>
-          <span class="mr-1">
-            <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
-          </span>
-          <a dropdownToggle mdbWavesEffect class="nav-link text-light dropdown-toggle waves-light" type="buton">
-            Welcome {{authService.decodedToken?.unique_name | titlecase}}
-            <span class="caret"></span>
-          </a>
-    
-          <div class="dropdown-menu dropdown dropdown-primary" *dropdownMenu role="menu">
-            <a mdbWavesEffect class="dropdown-item waves-light" [routerLink]="['/member/edit']">
-              <i class="fa fa-user"></i> Edit Profile</a>
-            <div class="divider dropdown-divider"></div>
-            <a mdbWavesEffect class="dropdown-item waves-light" (click)="logout()">
-              <i class="fa fa-sign-out"></i> Logout</a>
-          </div>
-        </div>
+        <span class="mr-1">
+          <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
+        </span>
+        <a dropdownToggle mdbWavesEffect class="nav-link text-light dropdown-toggle waves-light" type="buton">
+          Welcome {{authService.decodedToken?.unique_name | titlecase}}
+          <span class="caret"></span>
+        </a>
   
-      
-  
-      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline waves-light ml-auto" (ngSubmit)="login()">
-        <div class="md-form mt-0">
-        <input mdbWavesEffect class="form-control mr-sm-2 form-control-sm" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username" aria-label="Username">
-        <input mdbWavesEffect class="form-control mr-sm-2 form-control-sm" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
-        <button mdbBtn mdbWavesEffect color="success" [disabled]="!loginForm.valid" class="my-0 waves-light" type="submit" size="sm" outline="true">Login</button>
+        <div class="dropdown-menu dropdown dropdown-primary" *dropdownMenu role="menu">
+          <a mdbWavesEffect class="dropdown-item waves-light" [routerLink]="['/member/edit']">
+            <i class="fa fa-user"></i> Edit Profile</a>
+          <div class="divider dropdown-divider"></div>
+          <a mdbWavesEffect class="dropdown-item waves-light" (click)="logout()">
+            <i class="fa fa-sign-out"></i> Logout</a>
         </div>
-      </form>
+      </div>
+      <div *ngIf="!loggedIn()" class="form-inline waves-light ml-auto">
+        <button mdbBtn mdbWavesEffect (click)="loginEmmiter.emit()" color="success" class="my-0 waves-light" size="sm" outline="true">Login</button>
+        <button mdbBtn mdbWavesEffect (click)="registerEmmiter.emit()" color="info" class="my-0 waves-light" size="sm" outline="true">Register</button>
+      </div>
     </links>
     <!-- </div>  -->
   </mdb-navbar>
