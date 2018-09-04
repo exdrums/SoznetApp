@@ -14,11 +14,10 @@ namespace SoznetApp.Data
             
         }
         public DbSet<Value> Values { get; set; }
-
         public DbSet<Photo> Photos { get; set; }
-        
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<UserContact> Contacts { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
@@ -39,8 +38,8 @@ namespace SoznetApp.Data
             });
 
             builder.Entity<Like>()
-                .HasKey(k => new {k.LikerId, k.LikeeId}); // sets primary key with 2 properties (anon. object)
-            
+                .HasKey(k => new {k.LikerId, k.LikeeId}); 
+
             builder.Entity<Like>()
                 .HasOne(u => u.Likee)
                 .WithMany(u => u.Liker)
@@ -64,6 +63,21 @@ namespace SoznetApp.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);
+
+            builder.Entity<UserContact>(userContact => {
+                userContact.HasKey(k => new { k.UserId, k.ContactId });
+                userContact
+                    .HasOne(uc => uc.User)
+                    .WithMany(u => u.Contacts)
+                    .HasForeignKey(uc => uc.ContactId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                userContact
+                    .HasOne(uc => uc.Contact)
+                    .WithMany(u => u.ContactRequests)
+                    .HasForeignKey(uc => uc.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+            
         }
     }
 }
