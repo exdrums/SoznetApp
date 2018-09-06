@@ -18,5 +18,7 @@ namespace SoznetApp.Data
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+        Task<IEnumerable<UserContact>> GetUserContacts(int id);
+        Task<IEnumerable<UserContact>> GetRequestedContacts(int id);
     }
 }

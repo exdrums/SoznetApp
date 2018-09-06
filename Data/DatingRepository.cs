@@ -143,6 +143,24 @@ namespace SoznetApp.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+        public async Task<IEnumerable<UserContact>> GetUserContacts(int id)
+        {
+            var user = await _context.Users.Include(u => u.Contacts)
+                .ThenInclude(uc => uc.Contact)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            return user.Contacts; 
+        }
+
+        public async Task<IEnumerable<UserContact>> GetRequestedContacts(int id)
+        {
+            var userContacts = await _context.Contacts
+                .Include(uc => uc.User)
+                .Where(uc => uc.ContactId == id)
+                .ToListAsync();
+
+            return userContacts; 
+        }
 
         private async Task<IEnumerable<Like>> GetUserLikes(int id, bool likers)
         {

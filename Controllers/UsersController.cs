@@ -9,6 +9,7 @@ using SoznetApp.Helpers;
 using SoznetApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace SoznetApp.Controllers
 {
@@ -81,6 +82,59 @@ namespace SoznetApp.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpGet("{id}/friends")]
+        public async Task<IActionResult> GetFriends(int id)  
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var userContacts = await _repo.GetUserContacts(id);
+            var users = userContacts.Select(uc => uc.Contact);
+
+            return Ok(_mapper.Map<IEnumerable<UserForListDto>>(users));
+        }
+
+        [HttpPost("{id}/friends/{friendId}")]
+        public async Task<IActionResult> AddFriend(int id, int friendId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var userContact = new UserContact(){ UserId = id, ContactId = friendId };
+
+            _repo.Add<UserContact>(userContact);
+
+            if (await _repo.SaveAll())
+                return Ok(new {});
+            return BadRequest("Failed to add UserContact");
+        }
+
+        [HttpDelete("{id}/friends/{friendId}")]
+        public async Task<IActionResult> DeleteFriend(int id, int friendId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            var userContacts = await _repo.GetUserContacts(id);
+            var uc = userContacts.FirstOrDefault(c => c.ContactId == friendId);
+            if (uc != null)
+            {
+                _repo.Delete<UserContact>(uc);
+                return Ok("UserContact has been deleted");
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("{id}/friends/requests")]
+        public async Task<IActionResult> GetRequestsToFriends(int id)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            var userContacts = await _repo.GetRequestedContacts(id);
+            
+            var users = userContacts.Select(uc => uc.User);
+            return Ok(_mapper.Map<IEnumerable<UserForListDto>>(users));
         }
 
         [HttpPost("{id}/like/{recipientId}")]
