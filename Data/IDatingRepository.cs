@@ -20,5 +20,6 @@ namespace SoznetApp.Data
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
         Task<IEnumerable<UserContact>> GetUserContacts(int id);
         Task<IEnumerable<UserContact>> GetRequestedContacts(int id);
+        Task<UserContact> GetUserContact(int id, int contactId);
     }
 }

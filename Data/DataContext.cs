@@ -69,12 +69,12 @@ namespace SoznetApp.Data
                 userContact
                     .HasOne(uc => uc.User)
                     .WithMany(u => u.Contacts)
-                    .HasForeignKey(uc => uc.ContactId)
+                    .HasForeignKey(uc => uc.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
                 userContact
                     .HasOne(uc => uc.Contact)
                     .WithMany(u => u.ContactRequests)
-                    .HasForeignKey(uc => uc.UserId)
+                    .HasForeignKey(uc => uc.ContactId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
             

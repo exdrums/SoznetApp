@@ -101,14 +101,17 @@ namespace SoznetApp.Controllers
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
+
+            if (await _repo.GetUserContact(id, friendId) != null)
+                return BadRequest("You already add the user to your contact list");
+
             var userContact = new UserContact(){ UserId = id, ContactId = friendId };
 
             _repo.Add<UserContact>(userContact);
 
             if (await _repo.SaveAll())
-                return Ok(new {});
-            return BadRequest("Failed to add UserContact");
+                return Ok("The user was successfully added to your contact list.");
+            return BadRequest("Failed to add to contact list");
         }
 
         [HttpDelete("{id}/friends/{friendId}")]
@@ -116,8 +119,10 @@ namespace SoznetApp.Controllers
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            var userContacts = await _repo.GetUserContacts(id);
-            var uc = userContacts.FirstOrDefault(c => c.ContactId == friendId);
+            // var userContacts = await _repo.GetUserContacts(id);
+            // var uc = userContacts.FirstOrDefault(c => c.ContactId == friendId);
+            var uc = await _repo.GetUserContact(id, friendId);
+            
             if (uc != null)
             {
                 _repo.Delete<UserContact>(uc);
