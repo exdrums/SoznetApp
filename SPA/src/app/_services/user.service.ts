@@ -114,4 +114,20 @@ constructor(private http: HttpClient) { }
   markAsRead(userId: number, messageId: number) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {}).subscribe();
   }
+
+  getFriends(userId: number) {
+    return this.http.get<User[]>(this.baseUrl + 'users/' + userId + '/friends');
+  }
+
+  getRequestsToFriends(userId: number) {
+    return this.http.get<User[]>(this.baseUrl + 'users/' + userId + '/friends/requests');
+  }
+
+  addFriend(userId: number, contactId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/friends/' + contactId, {});
+  }
+
+  deleteFriend(userId: number, contactId: number) {
+    return this.http.delete(this.baseUrl + 'users/' + userId + '/friends/' + contactId);
+  }
 }

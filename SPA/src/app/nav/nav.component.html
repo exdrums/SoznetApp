@@ -12,6 +12,9 @@
         <li class="nav-item" routerLinkActive="active">
           <a mdbWavesEffect class="nav-link waves-light" [routerLink]="['/messages']">Messages</a>
         </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a mdbWavesEffect class="nav-link waves-light" [routerLink]="['/friends']">Friends</a>
+        </li>
         <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
           <a mdbWavesEffect class="nav-link waves-light" [routerLink]="['/admin']">Admin</a>
         </li>

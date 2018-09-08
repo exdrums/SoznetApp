@@ -49,6 +49,8 @@ import { HasRoleDirective } from './_directives/hasRole.directive';
 import { appRoutes } from './routes';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { SignalrService } from './_services/signalr.service';
+import { FriendsComponent } from './friends/friends.component';
+import { FriendsResolver } from './_resolves/friends.resolver';
 
 
 
@@ -64,32 +66,33 @@ export const jwtConfig = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HomeComponent,
-    RegisterComponent,
-    MemberListComponent,
-    ListsComponent,
-    MessagesComponent,
-    MemberCardComponent,
-    MemberDetailComponent,
-    MemberEditComponent,
-    MemberMessagesComponent,
-    PhotoEditorComponent,
-    AdminPanelComponent,
-    HasRoleDirective,
-    UserManagementComponent,
-    PhotoManagementComponent,
-    RolesModalComponent,
-    TimeAgoPipe,
-    LoginComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    // BsDropdownModule.forRoot(),
+   declarations: [
+      AppComponent,
+      NavComponent,
+      HomeComponent,
+      RegisterComponent,
+      MemberListComponent,
+      ListsComponent,
+      MessagesComponent,
+      MemberCardComponent,
+      MemberDetailComponent,
+      MemberEditComponent,
+      MemberMessagesComponent,
+      PhotoEditorComponent,
+      AdminPanelComponent,
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent,
+      TimeAgoPipe,
+      LoginComponent,
+      FriendsComponent
+   ],
+   imports: [
+      BrowserModule,
+      HttpModule,
+      FormsModule,
+      // BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TabsModule.forRoot(), // to migrate !!
     NgxGalleryModule, // to migrate
@@ -118,6 +121,7 @@ export const jwtConfig = {
     MemberEditResolver,
     ListsResolver,
     MessagesResolver,
+    FriendsResolver,
     ErrorInterceptorProvider
   ],
   entryComponents: [
