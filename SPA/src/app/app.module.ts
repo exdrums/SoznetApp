@@ -51,6 +51,7 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { SignalrService } from './_services/signalr.service';
 import { FriendsComponent } from './friends/friends.component';
 import { FriendsResolver } from './_resolves/friends.resolver';
+import { FriendsToAcceptResolver } from './_resolves/friendsToAccept.resolver';
 
 
 
@@ -122,6 +123,7 @@ export const jwtConfig = {
     ListsResolver,
     MessagesResolver,
     FriendsResolver,
+    FriendsToAcceptResolver,
     ErrorInterceptorProvider
   ],
   entryComponents: [
