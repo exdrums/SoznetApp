@@ -1,3 +1,25 @@
-
-<p>Friends here</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="btn-group">
+        <button mdbBtn mdbWavesEffect
+        mdbRadio="Friends" color="primary"
+        (click)="showFriends()" [(ngModel)]="showOptions">
+        <i class="fa fa-envelope"></i> 
+        Friends
+    </button>
+    <button mdbBtn mdbWavesEffect
+        mdbRadio="Pending" color="primary"
+        (click)="showFriends()" [(ngModel)]="showOptions">
+        <i class="fa fa-envelope-open"></i>
+        Pending
+    </button>
+    <button mdbBtn mdbWavesEffect
+        mdbRadio="Outgoing" color="primary"
+        (click)="showFriends()" [(ngModel)]="showOptions">
+        <i class="fa fa-paper-plane"></i>
+        Outgoing
+    </button>
+    </div>
+  </div>
+</div>
 <!-- listgroup/reviews -->
