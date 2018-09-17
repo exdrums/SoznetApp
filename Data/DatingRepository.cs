@@ -150,6 +150,7 @@ namespace SoznetApp.Data
                 // .ThenInclude(u => u.User)
                 .Include(u => u.Contacts)
                 .ThenInclude(uc => uc.Contact)
+                .ThenInclude(us => us.Photos)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             return user.Contacts; 
@@ -159,6 +160,7 @@ namespace SoznetApp.Data
         {
             var userContacts = await _context.Contacts
                 .Include(uc => uc.User)
+                .ThenInclude(u => u.Photos)
                 .Where(uc => uc.ContactId == id)
                 .ToListAsync();
 
@@ -167,7 +169,10 @@ namespace SoznetApp.Data
 
         public async Task<UserContact> GetUserContact(int id, int contactId)
         {
-            var userContact = await _context.Contacts.FirstOrDefaultAsync(uc => uc.UserId == id && uc.ContactId == contactId);
+            var userContact = await _context.Contacts
+                .Include(uc => uc.Contact)
+                .ThenInclude(u => u.Photos)
+                .FirstOrDefaultAsync(uc => uc.UserId == id && uc.ContactId == contactId);
                 //.Include(uc => uc.User)
             return userContact;
         }

@@ -1,24 +1,67 @@
 <div class="container mt-5">
   <div class="row">
     <div class="btn-group">
-        <button mdbBtn mdbWavesEffect
-        mdbRadio="Friends" color="primary"
-        (click)="showFriends()" [(ngModel)]="showOptions">
-        <i class="fa fa-envelope"></i> 
-        Friends
+      <button mdbBtn mdbWavesEffect
+      mdbRadio="Friends" color="primary"
+      (click)="showFriends()" [(ngModel)]="showOptions">
+      <i class="fa fa-envelope"></i> 
+      Friends
     </button>
     <button mdbBtn mdbWavesEffect
-        mdbRadio="Pending" color="primary"
-        (click)="showFriends()" [(ngModel)]="showOptions">
-        <i class="fa fa-envelope-open"></i>
-        Pending
+      mdbRadio="Pending" color="primary"
+      (click)="showFriends()" [(ngModel)]="showOptions">
+      <i class="fa fa-envelope-open"></i>
+      Pending
     </button>
     <button mdbBtn mdbWavesEffect
-        mdbRadio="Outgoing" color="primary"
-        (click)="showFriends()" [(ngModel)]="showOptions">
-        <i class="fa fa-paper-plane"></i>
-        Outgoing
+      mdbRadio="Outgoing" color="primary"
+      (click)="showFriends()" [(ngModel)]="showOptions">
+      <i class="fa fa-paper-plane"></i>
+      Outgoing
     </button>
+    </div>
+  </div>
+  <div *ngIf="showedFriends.length > 0" class="row">
+    <div *ngFor="let user of showedFriends" class="col-md-6">
+      <mdb-card class="mt-4">
+        <!--include in server TODO -->
+        <ul class="list-inline">
+        <li class="list-inline-item">
+          <img src="{{user.photoUrl ? user.photoUrl : '../../../assets/user.png'}}" alt="{{user.knownAs}}">
+        </li>
+      <li class="list-inline-item">
+        <h3>{{user.knownAs}}</h3>
+        <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item">
+              <button mdbBtn mdbWavesEffect
+                size="sm" floating="true" color="primary" 
+                [routerLink]="['/members/', user.id]">
+                <i class="fa fa-user" style="min-width: 14px;"></i>
+              </button>
+            </li>
+            <li class="list-inline-item">
+              <button mdbBtn mdbWavesEffect *ngIf="showOptions == 'Pending'"
+                size="sm" floating="true" color="primary"
+                (click)="addContact(user.id)">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button mdbBtn mdbWavesEffect *ngIf="showOptions == 'Friends'|| showOptions == 'Outgoing'"
+                size="sm" floating="true" color="primary"
+                (click)="deleteContact(user.id)">
+                <i class="fa fa-minus"></i>
+              </button>
+            </li>
+            <li class="list-inline-item">
+              <button mdbBtn mdbWavesEffect
+                size="sm" floating="true" color="primary" 
+                [routerLink]="['/members/', user.id]" [queryParams]="{tab: '3'}">
+                <i class="fa fa-envelope"></i>
+              </button>
+            </li>
+        </ul>
+      </li>
+    </ul>
+      </mdb-card>
     </div>
   </div>
 </div>
