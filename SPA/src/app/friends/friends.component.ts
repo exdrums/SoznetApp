@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-friends',
@@ -38,7 +39,7 @@ constructor(
       this.showedFriends = this.friendsToAccept.filter(x => {
         let result = true;
         this.friends.forEach(f => {
-          if (f.id !== x.id) {
+          if (f.id === x.id) {
             result = false;
           }
         });
@@ -48,7 +49,7 @@ constructor(
       this.showedFriends = this.friends.filter(x => {
         let result = true;
         this.friendsToAccept.forEach(f => {
-          if (f.id !== x.id) {
+          if (f.id === x.id) {
             result = false;
           }
         });
@@ -65,27 +66,37 @@ constructor(
         return result;
       });
     }
-    // console.log(this.friends);
-    // console.log(this.friendsToAccept);
-    // console.log(this.showedFriends);
   }
 
-  // to debug both
-  addContact(contactId: number) {
-    this.userService.addFriend(this.authService.currentUser.id, contactId)
+  addContact(contact: User) {
+    this.userService.addFriend(this.authService.currentUser.id, contact.id)
     .subscribe(data => {
       this.alertify.success('You have added this friend');
-      // delete from array
+      const ind: number = this.friendsToAccept.indexOf(contact);
+      if (ind !== -1) {
+        // this.friendsToAccept.splice(ind, 1);
+        this.friends.unshift(contact);
+      }
+      this.showFriends();
     }, error => {
       this.alertify.error(error);
     });
   }
-  deleteContact(contactId: number) {
-    this.userService.deleteFriend(this.authService.currentUser.id, contactId)
+  deleteContact(contact: User) {
+    this.userService.deleteFriend(this.authService.currentUser.id, contact.id)
     .subscribe(data => {
       this.alertify.success('You have deleted this friend');
-      // delete from array TODO
+      const ind: number = this.friends.indexOf(contact);
+      if (ind !== -1) {
+        // delete friend
+        this.friends.splice(ind, 1);
+        // if (this.showOptions !== 'Friends') {
+        //   this.friendsToAccept.unshift(contact);
+        // }
+      }
+      this.showFriends();
     }, error => {
+      console.log(error);
       this.alertify.error(error);
     });
   }

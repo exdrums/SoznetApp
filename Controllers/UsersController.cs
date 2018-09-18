@@ -110,7 +110,7 @@ namespace SoznetApp.Controllers
             _repo.Add<UserContact>(userContact);
 
             if (await _repo.SaveAll())
-                return Ok("The user was successfully added to your contact list.");
+                return Ok(new {});
             return BadRequest("Failed to add to contact list");
         }
 
@@ -126,7 +126,7 @@ namespace SoznetApp.Controllers
             if (uc != null)
             {
                 _repo.Delete<UserContact>(uc);
-                return Ok("UserContact has been deleted");
+                return Ok(new {});
             }
             return BadRequest();
         }
