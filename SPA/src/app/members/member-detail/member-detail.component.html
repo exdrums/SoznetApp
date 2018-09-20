@@ -25,9 +25,12 @@
           </div>
         </div>
         <div class="card-footer">
+          <div class="btn-group d-flex mb-2">
+            <button class="btn btn-primary w-50" [disabled]="isFriend" (click)="addThisFriend()">Add friend</button>
+            <button class="btn btn-primary w-50">Like</button>
+          </div>
           <div class="btn-group d-flex">
-            <button class="btn btn-primry w-100">Like</button>
-            <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
+            <button class="btn btn-default w-100" (click)="selectTab(3)">Message</button>
           </div>
         </div>
       </div>

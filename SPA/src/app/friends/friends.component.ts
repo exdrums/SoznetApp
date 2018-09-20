@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-friends',
